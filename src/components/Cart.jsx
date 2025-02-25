@@ -3,8 +3,8 @@ import { useCart } from "../context/cartContext";
 import { useMenu } from "../context/menuContext";
 
 function Cart() {
-  const {menu} = useMenu();
-  const {cart, setCart} = useCart();
+  const { menu } = useMenu();
+  const { cart } = useCart();
 
   if (!menu)
     return (
@@ -24,8 +24,6 @@ function Cart() {
               item={allMenus.find((menu) => menu.id === el.id)}
               options={el.options}
               quantity={el.quantity}
-              cart={cart}
-              setCart={setCart}
             />
           ))
         ) : (
@@ -37,6 +35,7 @@ function Cart() {
 }
 
 function CartItem({ item, options, quantity }) {
+  const { removeFromCart } = useCart();
   return (
     <li className="cart-item">
       <div className="cart-item-info">
@@ -54,7 +53,7 @@ function CartItem({ item, options, quantity }) {
       <button
         className="cart-item-delete"
         onClick={() => {
-          setCart(cart.filter((el) => item.id !== el.id));
+          removeFromCart(item.id);
         }}
       >
         삭제

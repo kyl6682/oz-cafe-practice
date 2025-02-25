@@ -4,12 +4,21 @@ const cartContext = createContext();
 
 export function CartProvidor({ children }) {
   const [cart, setCart] = useState([]);
-  return (
-    <cartContext value={{cart, setCart}}>
-        {children}
-    </cartContext>
-  )
 
+  const addToCart = (options, quantity, id) => {
+    setCart([...cart, { options, quantity, id }]);
+    setModalOn(false);
+  };
+
+  const removeFromCart = (id) => {
+    setCart(cart.filter((el) => el.id !== id));
+  };
+
+  return (
+    <cartContext value={{ cart, setCart, addToCart, removeFromCart }}>
+      {children}
+    </cartContext>
+  );
 }
 
 export function useCart() {
