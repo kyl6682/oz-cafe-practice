@@ -3,7 +3,7 @@ import Item from "./Item";
 import OrderModal from "./OrderModal";
 import { useMenu } from "../context/menuContext";
 
-function Menu({ cart, setCart }) {
+function Menu() {
   const {menu} = useMenu();
   const [modalOn, setModalOn] = useState(false);
   const [modalMenu, setModalMenu] = useState(null);
